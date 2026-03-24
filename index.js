@@ -94,8 +94,8 @@ try {
     bot.on('text', (ctx) => {
         console.log(ctx.message.text);
         const text = ctx.message.text.toLowerCase();
-        
-        if (text.includes('I love you')){
+
+        if (text.includes('love you')){
             ctx.reply("I love you more! 💖");
         }
         else if (text.includes('how are you')) {
