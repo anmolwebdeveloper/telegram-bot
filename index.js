@@ -27,7 +27,7 @@ app.post('/api/webchat', express.json(), (req, res) => {
         reply = 'Welcome to Anmosh\'s Algobot! 🚀 You are chatting from the Web! Try asking "what can you do" or ask for an algorithm like "binarysearch".';
     } 
     else if (algorithms[algoKey]) {
-        reply = "Here is your code:\\n\\n" + algorithms[algoKey];
+        reply = "Here is your code:\n\n" + algorithms[algoKey];
     }
     else if (userMessage.includes('love you')){
         reply = "I love you more! 💖";
