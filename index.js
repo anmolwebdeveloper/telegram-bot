@@ -8,10 +8,15 @@ const app = express();
 
 app.use(express.json());
 
-// Set up webhook logic for Vercel
-app.post('/api/webhook', (req, res) => {
-    bot.handleUpdate(req.body);
-    res.sendStatus(200);
+// Set up webhook logic for Vercel safely
+app.post('/api/webhook', async (req, res) => {
+    try {
+        await bot.handleUpdate(req.body);
+        res.status(200).send('OK');
+    } catch (error) {
+        console.error('Webhook Error:', error);
+        res.status(500).send('Error handling update');
+    }
 });
 
 // A quick health check route
