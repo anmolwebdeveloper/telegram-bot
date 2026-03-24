@@ -24,7 +24,7 @@ app.post('/api/webchat', express.json(), (req, res) => {
     const algoKey = isCommand ? userMessage.slice(1) : userMessage;
 
     if (userMessage === '/start' || userMessage === 'start') {
-        reply = 'Welcome to Anmosh\'s Algobot! 🚀 You are chatting from the Web! Try asking "what can you do" or ask for an algorithm like "binarysearch".';
+        reply = 'Welcome to Anmosh\'s Algobot! 🚀 You are chatting from the Web! You can try a fun activity by saying I love you or asking how are you? or what can you do? I can also share algorithm code if you ask for it! Try /binarysearch or /gcd for some cool code! 🚀".';
     } 
     else if (algorithms[algoKey]) {
         reply = "Here is your code:\n\n" + algorithms[algoKey];

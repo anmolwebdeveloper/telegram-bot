@@ -5,183 +5,311 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anmosh's Algobot 🚀</title>
     <style>
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top right, #1a2a6c, #112b3c, #000000);
+            color: #ffffff;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            padding: 2rem 1rem;
             text-align: center;
+            overflow-x: hidden;
         }
+
         .container {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            animation: fadeIn 1s ease-in-out;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideDown 0.8s ease-out;
             margin-bottom: 2rem;
+            z-index: 10;
         }
+
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            background: -webkit-linear-gradient(#00c6ff, #0072ff);
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
         }
-        p {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            color: #ccc;
+
+        p.subtitle {
+            font-size: 1.1rem;
+            color: #b3c5d6;
+            margin-bottom: 1.5rem;
         }
+
         .features {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 1rem;
         }
+
         .feature-badge {
-            background: rgba(0, 198, 255, 0.2);
-            padding: 8px 15px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            border: 1px solid #00c6ff;
+            background: rgba(79, 172, 254, 0.15);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #e0f2ff;
+            border: 1px solid rgba(79, 172, 254, 0.3);
+            transition: all 0.3s ease;
         }
         
-        /* Chat UI Styles */
+        .feature-badge:hover {
+            background: rgba(79, 172, 254, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Modern Chat UI Styles */
         .chat-box {
-            width: 90%;
-            max-width: 500px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            border: 1px solid rgba(0, 198, 255, 0.3);
+            width: 100%;
+            max-width: 550px;
+            background: rgba(10, 15, 30, 0.6);
+            border-radius: 24px;
+            border: 1px solid rgba(79, 172, 254, 0.2);
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: fadeInBody 1s ease-in-out;
         }
+
+        .chat-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #00e676;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00e676;
+        }
+
         .chat-history {
-            height: 250px;
-            padding: 1rem;
+            height: 320px;
+            padding: 1.5rem;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            text-align: left;
+            gap: 12px;
+            scroll-behavior: smooth;
         }
+
         .message {
-            padding: 10px 15px;
-            border-radius: 15px;
+            padding: 12px 18px;
+            border-radius: 18px;
             max-width: 85%;
             word-wrap: break-word;
             font-size: 0.95rem;
+            line-height: 1.4;
             white-space: pre-wrap;
-        }
-        .msg-bot {
-            background: linear-gradient(135deg, #00c6ff, #0072ff);
-            align-self: flex-start;
-            border-bottom-left-radius: 0;
-            color: white;
-        }
-        /* Style algorithm outputs to look like code blocks! */
-        .msg-bot code {
-            font-family: monospace;
-            background: rgba(0,0,0,0.2);
-            padding: 2px 4px;
-            border-radius: 4px;
-            display: block;
-        }
-        .msg-user {
-            background: rgba(255, 255, 255, 0.2);
-            align-self: flex-end;
-            border-bottom-right-radius: 0;
-            color: white;
-        }
-        .chat-input-area {
-            display: flex;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.3);
-            border-top: 1px solid rgba(0, 198, 255, 0.3);
-        }
-        input[type="text"] {
-            flex: 1;
-            padding: 10px 15px;
-            border-radius: 20px;
-            border: none;
-            outline: none;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
-            font-size: 1rem;
-        }
-        button {
-            background: #00c6ff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin-left: 10px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #0072ff;
-        }
-        
-        .telegram-link {
-            margin-top: 20px;
-            color: #00c6ff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        .telegram-link:hover {
-            text-decoration: underline;
-            opacity: 1;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            animation: popIn 0.3s ease-out forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .msg-bot {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            color: #f0f4f8;
+        }
+
+        .msg-bot code {
+            font-family: 'Courier New', Courier, monospace;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 10px;
+            border-radius: 8px;
+            display: block;
+            margin-top: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #a3d9ff;
+            font-size: 0.85rem;
+            overflow-x: auto;
+        }
+
+        .msg-user {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            outline: none;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
         
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
-        ::-webkit-scrollbar-thumb { background: #00c6ff; border-radius: 4px; }
+        input[type="text"]:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #00c6ff;
+        }
+        
+        input[type="text"]::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        button {
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 198, 255, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 198, 255, 0.5);
+        }
+
+        .bottom-links {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .telegram-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(42, 171, 238, 0.1);
+            color: #2aabee;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 10px 25px;
+            border-radius: 30px;
+            border: 1px solid #2aabee;
+            transition: all 0.3s ease;
+        }
+
+        .telegram-link:hover {
+            background: #2aabee;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(42, 171, 238, 0.4);
+        }
+
+        .portfolio-link {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .portfolio-link:hover {
+            color: #00c6ff;
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInBody {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.9) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 198, 255, 0.5); }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Anmosh's Algobot 🚀</h1>
-        <p>Your personal DSA companion.</p>
+        <p class="subtitle">Your AI-powered Data Structures & Algorithms companion.</p>
         <div class="features">
-            <span class="feature-badge">Searching</span>
-            <span class="feature-badge">Sorting</span>
-            <span class="feature-badge">Math & Strings</span>
+            <span class="feature-badge">🔍 Searching</span>
+            <span class="feature-badge">🔄 Sorting</span>
+            <span class="feature-badge">🔢 Math</span>
+            <span class="feature-badge">🔤 Strings</span>
         </div>
     </div>
 
-    <!-- Web Chat Interface -->
+    <!-- Enhanced Web Chat Interface -->
     <div class="chat-box">
+        <div class="chat-header">
+            <div class="status-dot"></div>
+            Algobot is Online 
+        </div>
         <div class="chat-history" id="chatHistory">
             <div class="message msg-bot">Hello! 👋 I am Anmosh's Algobot. You can chat with me directly here in your browser!<br><br>Try typing "hi", "help", or ask for an algorithm like "binarysearch" or "bubblesort".</div>
         </div>
         <form class="chat-input-area" id="chatForm">
-            <input type="text" id="userInput" placeholder="Ask me something or type an algorithm..." autocomplete="off" required>
+            <input type="text" id="userInput" placeholder="Ask for an algorithm (e.g. gcd)..." autocomplete="off" required>
             <button type="submit">Send</button>
         </form>
     </div>
 
-    <a href="https://web.telegram.org/a/#?tgaddr=tg%3A%2F%2Fresolve%3Fdomain%3Danmbot" target="_blank" class="telegram-link">Chat on Telegram Web 💬</a>
+    <div class="bottom-links">
+        <a href="https://web.telegram.org/a/#?tgaddr=tg%3A%2F%2Fresolve%3Fdomain%3Danmbot" target="_blank" class="telegram-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 8.8C16.49 10.74 15.82 14.53 15.48 16.29C15.33 17.04 15.05 17.29 14.78 17.32C14.19 17.37 13.73 16.92 13.16 16.55C12.27 15.97 11.76 15.61 10.9 15.04C9.92 14.39 10.55 14.04 11.13 13.44C11.28 13.29 13.88 10.93 13.93 10.72C13.94 10.69 13.94 10.58 13.88 10.52C13.81 10.46 13.72 10.48 13.65 10.5C13.55 10.52 11.96 11.58 8.87 13.66C8.42 13.97 8.01 14.12 7.64 14.11C7.23 14.1 6.46 13.88 5.88 13.7C5.17 13.47 4.6 13.35 4.65 12.95C4.68 12.74 4.96 12.53 5.5 12.31C9.04 10.78 11.4 9.77 12.58 9.28C14.81 8.35 15.28 8.19 15.58 8.18C15.65 8.18 15.81 8.2 15.9 8.27C15.98 8.33 16.02 8.44 16.03 8.52C16.03 8.58 16.02 8.71 16.02 8.71H16.64Z"/>
+            </svg>
+            Chat on Telegram Web 💬
+        </a>
+        <a href="https://anmolsharma-one.vercel.app" target="_blank" class="portfolio-link">
+            Created by Anmol Sharma | Visit Portfolio
+        </a>
+    </div>
 
     <script>
         const chatForm = document.getElementById('chatForm');
@@ -191,15 +319,15 @@
         function appendMessage(text, sender) {
             const div = document.createElement('div');
             div.className = `message ${sender === 'user' ? 'msg-user' : 'msg-bot'}`;
-            // If it seems to be code, let's wrap it in a code tag!
-            if (sender === 'bot' && text.includes('function') || text.includes('Here is your code:')) {
-                div.innerHTML = `<code>${text}</code>`;
+            
+            if (sender === 'bot' && (text.includes('function') || text.includes('Here is your code:'))) {
+                const codeSnippet = text.replace('Here is your code:\n\n', '').trim();
+                div.innerHTML = `Here is your code:<br><code>${codeSnippet}</code>`;
             } else {
                 div.innerText = text;
             }
             chatHistory.appendChild(div);
-            // Scroll to bottom dynamically
-            chatHistory.scrollTop = chatHistory.scrollHeight;
+            setTimeout(() => chatHistory.scrollTop = chatHistory.scrollHeight, 50);
         }
 
         chatForm.addEventListener('submit', async (e) => {
@@ -211,7 +339,6 @@
             userInput.value = '';
 
             try {
-                // Send the message to our new Vercel Web API endpoint
                 const res = await fetch('/api/webchat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
