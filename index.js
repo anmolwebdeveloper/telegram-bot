@@ -95,7 +95,7 @@ try {
         console.log(ctx.message.text);
         const text = ctx.message.text.toLowerCase();
         
-        if (text.includes('love you')){
+        if (text.includes('I love you')){
             ctx.reply("I love you more! 💖");
         }
         else if (text.includes('how are you')) {
@@ -105,7 +105,7 @@ try {
             ctx.reply("I'm Anmosh's Bot, your friendly neighborhood assistant! 🦸‍♂️");
         }
         else if (text.includes('hi') || text.includes('hello') || text.includes('hey')) {
-            ctx.reply("Hey there! 👋 Have you had your coffee yet? ☕");
+            ctx.reply("Hey there! I am anmosh's Bot! You can try a fun activity by saying I love you or asking how are you? or what can you do? I can also share algorithm code if you ask for it! Try /binarysearch or /gcd for some cool code! 🚀");
         }
         else if (text.includes('what can you do') || text.includes('help')) {
             ctx.reply("I can help you with cool algorithms (try /binarysearch), respond to your greetings, and keep you company. 🦾");
