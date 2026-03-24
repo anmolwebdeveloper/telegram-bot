@@ -3,29 +3,16 @@ import 'dotenv/config';
 import { algorithms } from './algorithms.js';
 import express from 'express';
 
-const bot  = new Telegraf(process.env.BOT_TOKEN);
+const bot = new Telegraf(process.env.BOT_TOKEN);
 const app = express();
 
-app.use(express.json());
+// Use Telegraf's built-in webhookHandler properly
+app.use(bot.webhookCallback('/api/webhook'));
 
-// Set up webhook logic for Vercel safely
-app.post('/api/webhook', async (req, res) => {
-    try {
-        await bot.handleUpdate(req.body);
-        res.status(200).send('OK');
-    } catch (error) {
-        console.error('Webhook Error:', error);
-        res.status(500).send('Error handling update');
-    }
-});
-
-// A quick health check route
+// Health check route just in case
 app.get('/api/health', (req, res) => {
     res.send('Bot is healthy and running cool! 🚀');
 });
-
-// Basic static serving if running locally (Vercel handles /public mostly automatically based on vercel.json)
-app.use(express.static('public'));
 
 try {
     bot.start((ctx) => {
@@ -94,7 +81,7 @@ try {
 } catch(e) {
     console.log("Unexpected error:", e);
 }
-// bot.launch();
-// Export the app for Vercel Serverless
+
+// Ensure Vercel exports the Express app
 export default app;
 
