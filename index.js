@@ -14,6 +14,43 @@ app.get('/api/health', (req, res) => {
     res.send('Bot is healthy and running cool! 🚀');
 });
 
+// Web UI Chat API (Allows chatting directly on the browser!)
+app.post('/api/webchat', express.json(), (req, res) => {
+    const userMessage = req.body.message ? req.body.message.toLowerCase().trim() : '';
+    let reply = '';
+
+    // Handle commands or raw text matching algorithms
+    const isCommand = userMessage.startsWith('/');
+    const algoKey = isCommand ? userMessage.slice(1) : userMessage;
+
+    if (userMessage === '/start' || userMessage === 'start') {
+        reply = 'Welcome to Anmosh\'s Algobot! 🚀 You are chatting from the Web! Try asking "what can you do" or ask for an algorithm like "binarysearch".';
+    } 
+    else if (algorithms[algoKey]) {
+        reply = "Here is your code:\\n\\n" + algorithms[algoKey];
+    }
+    else if (userMessage.includes('love you')){
+        reply = "I love you more! 💖";
+    }
+    else if (userMessage.includes('how are you')) {
+        reply = "I'm running smoothly on a V8 engine, feeling great! ⚡ How about you?";
+    }
+    else if (userMessage.includes('who are you') || userMessage.includes('your name')) {
+        reply = "I'm Anmosh's Bot, your friendly neighborhood assistant! 🦸‍♂️";
+    }
+    else if (userMessage.includes('hi') || userMessage.includes('hello') || userMessage.includes('hey')) {
+        reply = "Hey there! 👋 Have you had your coffee yet? ☕";
+    }
+    else if (userMessage.includes('what can you do') || userMessage.includes('help')) {
+        reply = "I can help you with cool algorithms! Try asking for: binarysearch, linearsearch, bubblesort, selectionsort, insertionsort, factorial, fibonacci, gcd, prime, palindrome, reverse.";
+    }
+    else {
+        reply = 'Hmm, I don\'t quite understand that yet. But I am always learning! 🧠 Try saying "hi" or asking "what can you do".';
+    }
+
+    res.json({ reply });
+});
+
 try {
     bot.start((ctx) => {
         ctx.reply('Welcome to Anmosh\'s Algobot! 🚀 What would you like to know?', 
