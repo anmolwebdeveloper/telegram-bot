@@ -4,7 +4,7 @@ import 'dotenv/config';
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 // Remember to change this URL to your actual Vercel app URL!
-const webhookUrl = "https://telegram-bot-lyart-delta-13.vercel.app/";
+const webhookUrl = "https://telegram-bot-lyart-delta-13.vercel.app/api/webhook";
 
 bot.telegram.setWebhook(webhookUrl)
     .then(() => {
