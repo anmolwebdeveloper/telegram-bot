@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmosh's Algobot 🚀</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: -webkit-linear-gradient(#00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #ccc;
+        }
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+        .feature-badge {
+            background: rgba(0, 198, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: 1px solid #00c6ff;
+        }
+        .cta-btn {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            border: none;
+            padding: 15px 30px;
+            color: white;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            font-weight: bold;
+        }
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 198, 255, 0.4);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Anmosh's Algobot 🚀</h1>
+        <p>Your personal DSA companion right inside Telegram.</p>
+        
+        <div class="features">
+            <span class="feature-badge">🔍 Searching Algos</span>
+            <span class="feature-badge">🔄 Sorting Algos</span>
+            <span class="feature-badge">🔢 Math & Strings</span>
+            <span class="feature-badge">🧠 Conversational</span>
+        </div>
+
+        <a href="https://t.me/YOUR_BOT_USERNAME_HERE" target="_blank" class="cta-btn">Chat with Bot Now 💬</a>
+    </div>
+</body>
+</html>

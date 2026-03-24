@@ -1,8 +1,26 @@
 import { Telegraf, Markup } from 'telegraf';
 import 'dotenv/config';
 import { algorithms } from './algorithms.js';
+import express from 'express';
 
 const bot  = new Telegraf(process.env.BOT_TOKEN);
+const app = express();
+
+app.use(express.json());
+
+// Set up webhook logic for Vercel
+app.post('/api/webhook', (req, res) => {
+    bot.handleUpdate(req.body);
+    res.sendStatus(200);
+});
+
+// A quick health check route
+app.get('/api/health', (req, res) => {
+    res.send('Bot is healthy and running cool! 🚀');
+});
+
+// Basic static serving if running locally (Vercel handles /public mostly automatically based on vercel.json)
+app.use(express.static('public'));
 
 try {
     bot.start((ctx) => {
@@ -68,9 +86,10 @@ try {
         }
     });
 
-    bot.launch();
-    console.log("Bot is running cool! 🚀");
 } catch(e) {
     console.log("Unexpected error:", e);
 }
+// bot.launch();
+// Export the app for Vercel Serverless
+export default app;
 
